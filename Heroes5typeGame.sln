@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Heroes5typeGame", "Heroes5typeGame.vcxproj", "{6EAD160A-45EC-4654-BE49-059FE52E5F88}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6EAD160A-45EC-4654-BE49-059FE52E5F88}.Debug|x64.ActiveCfg = Debug|x64
+		{6EAD160A-45EC-4654-BE49-059FE52E5F88}.Debug|x64.Build.0 = Debug|x64
+		{6EAD160A-45EC-4654-BE49-059FE52E5F88}.Debug|x86.ActiveCfg = Debug|Win32
+		{6EAD160A-45EC-4654-BE49-059FE52E5F88}.Debug|x86.Build.0 = Debug|Win32
+		{6EAD160A-45EC-4654-BE49-059FE52E5F88}.Release|x64.ActiveCfg = Release|x64
+		{6EAD160A-45EC-4654-BE49-059FE52E5F88}.Release|x64.Build.0 = Release|x64
+		{6EAD160A-45EC-4654-BE49-059FE52E5F88}.Release|x86.ActiveCfg = Release|Win32
+		{6EAD160A-45EC-4654-BE49-059FE52E5F88}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {578E521F-6E20-4D08-B6DD-66B2E8B26785}
+	EndGlobalSection
+EndGlobal

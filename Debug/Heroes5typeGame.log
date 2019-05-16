@@ -1,0 +1,5 @@
+﻿  Heroes5typeGame.cpp
+C:\Users\matiz\source\repos\Heroes5typeGame\FuncHandling.h(79): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\matiz\source\repos\Heroes5typeGame\FuncHandling.h(141): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\matiz\source\repos\Heroes5typeGame\FuncHandling.h(143): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+  Heroes5typeGame.vcxproj -> C:\Users\matiz\source\repos\Heroes5typeGame\Debug\Heroes5typeGame.exe
