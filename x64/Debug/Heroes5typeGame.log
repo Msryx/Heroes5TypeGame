@@ -1,0 +1,4 @@
+﻿  Heroes5typeGame.cpp
+C:\Users\ADMIN\source\repos\Heroes5typeGame\FuncHandling.h(144): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\ADMIN\source\repos\Heroes5typeGame\FuncHandling.h(146): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+  Heroes5typeGame.vcxproj -> C:\Users\ADMIN\Source\Repos\Heroes5TypeGame\x64\Debug\Heroes5typeGame.exe

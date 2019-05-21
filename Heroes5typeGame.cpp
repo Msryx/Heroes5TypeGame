@@ -1,7 +1,7 @@
 ﻿// Heroes5typeGame.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
 //
 
-#include <C:\Users\matiz\source\repos\Heroes5typeGame\FuncHandling.h>
+#include <C:\Users\ADMIN\source\repos\Heroes5typeGame\FuncHandling.h>
 
 
 
@@ -9,17 +9,19 @@
 
 int main()
 {
-	PlayerPerson playerP(0);
-	playerP.order = 0;
+	PlayerPerson playerP(0,1,2), testEnemy(0, 1, 2);
 	playerP.createMap();
 	positionVec unitP;
-	unitP.positionX = playerP.Army[0].at(0).position.positionY;
-	unitP.positionY = playerP.Army[0].at(0).position.positionX;
+	unitP.positionX = playerP.Army.at(0).position.positionY;
+	unitP.positionY = playerP.Army.at(0).position.positionX;
 	std::cout << "\nPozycjaX: " << unitP.positionX << " PozycjaY: " << unitP.positionY << std::endl;
 	playerP.refreshMap();
-	playerP.Army[0].at(0).position.positionY = 2;
-	playerP.Army[0].at(0).position.positionX = 2;
-	playerP.refreshMap();
+	bool gameOn = true;
+	while (gameOn) {
+		playerP.moveUnit(playerP.Army.at(0));
+		std::cin >> gameOn;
+	}
+	//playerP.refreshMap();
 	/*for (int x = 0; x < mapSize; x++)
 	{
 		for (int y = 0; y < mapSize; y++)

@@ -32,6 +32,7 @@ struct unit {
 		range,
 		dmg,
 		amount;
+	bool movmentLeft;
 	positionVec position;
 	//Tylko do wersji ascii
 	char symbole = '1';
@@ -39,12 +40,14 @@ struct unit {
 
 class PlayerPerson {
 public:
+	int pointsOfAction;
 	bool order;
-	std::vector <unit> Army[7];
+	std::vector <unit> Army;
 	mapWithUnits map[mapSize][mapSize];
 	void refreshMap();
 	void createMap();
-	PlayerPerson( int typeOfStart);
+	PlayerPerson( int typeOfStart, bool start, int actionPoints);
+	void moveUnit(unit &oneUnit);
 	//TODO Ruch jednostek, walka jednostek, budowa jednostek, u¿ycie energii
 };
 
@@ -75,12 +78,10 @@ void cleanScreen() {
 void PlayerPerson::refreshMap() {
 	cleanScreen();
 	positionVec pos;
-	for (int x = 0; x < 7; x++)
-	{
-		for (int y = 0; y < Army[x].size(); y++) {
-			pos.positionX = Army[x].at(y).position.positionX;
-			pos.positionY = Army[x].at(y).position.positionY;
-			map[pos.positionX][pos.positionY].symbol = Army[x].at(y).symbole;
+		for (int y = 0; y < Army.size(); y++) {
+			pos.positionX = Army.at(y).position.positionX;
+			pos.positionY = Army.at(y).position.positionY;
+			map[pos.positionX][pos.positionY].symbol = Army.at(y).symbole;
 			if (!order) {
 				map[pos.positionX][pos.positionY].type = player1;
 			}
@@ -89,7 +90,6 @@ void PlayerPerson::refreshMap() {
 				map[pos.positionX][pos.positionY].type = player2;
 			}
 		}
-	}
 
 	for (int y = 0; y < mapSize; y++)
 	{
@@ -137,18 +137,98 @@ void PlayerPerson::createMap() {
 }
 
 //TODO Obrócenie mapy dla ka¿dego gracza
-PlayerPerson::PlayerPerson( int typeOfStart) {
-	Army->resize(1);
+PlayerPerson::PlayerPerson( int typeOfStart, bool start, int actionPoints) {
+	Army.resize(1);
+	order = start;
+	pointsOfAction = actionPoints;
 	float posit = ceil(mapSize / 2);
 	
-	Army[0].at(0).position.positionY = posit;
+	Army.at(0).position.positionY = posit;
 	if (order) {
-		Army[0].at(0).position.positionX = mapSize-2;
+		Army.at(0).position.positionX = mapSize-2;
 	}
 	else
 	{
-		Army[0].at(0).position.positionX = 1;
+		Army.at(0).position.positionX = 1;
 	}
+	//TODO Deklracja jednostki, testowe, przesun¹æ do osobnej funkcji
+	Army.at(0).amount = 2;
+	Army.at(0).costOfBuild = 1;
+	Army.at(0).costOfUse = 1;
+	Army.at(0).dmg = 1;
+	Army.at(0).level = 0;
+	Army.at(0).movment = 2;
+	Army.at(0).range = 1;
 	std::cout << "Posit: " << posit << " OrderLoc: " << mapSize -2;
+}
+
+void PlayerPerson::moveUnit(unit& oneUnit)
+{
+	const int move = oneUnit.movment;
+	positionVec startPosit = oneUnit.position;
+	positionVec endPosit = oneUnit.position;
+	//Sprawdza czy nie wyjdzie poza tablicê map
+
+	if (startPosit.positionX - move < 1) {
+		startPosit.positionX = 1;
+	}
+	else
+	{
+		startPosit.positionX -= move;
+	}
+	if (startPosit.positionY - move < 1)
+	{
+		startPosit.positionY = 1;
+	}
+	else
+	{
+		startPosit.positionY -= move;
+	}
+
+	if (endPosit.positionX + move > mapSize - 2) {
+		endPosit.positionX = mapSize-2;
+	}
+	else
+	{
+		endPosit.positionX += move;
+	}
+	if (endPosit.positionY + move > mapSize -2)
+	{
+		endPosit.positionY = mapSize-2;
+	}
+	else
+	{
+		endPosit.positionY += move;
+	}
+	std::vector <positionVec> freeToMove;
+	for (int y = startPosit.positionX; y <= endPosit.positionX; y++) {
+		for (int x = startPosit.positionY; x <= endPosit.positionY; x++) {
+			if (map[y][x].type == empty) {
+				positionVec emptyPlace;
+				emptyPlace.positionX = x;
+				emptyPlace.positionY = y;
+				freeToMove.push_back(emptyPlace);
+			}
+		}
+	}
+	std::cout << "Dostepne ruch:\n";
+	for (int x = 0; x < freeToMove.size(); x++) {
+		std::cout << "Ruch nr. " << x+1 << " ## X: " << freeToMove.at(x).positionX << " Y: " << freeToMove.at(x).positionY << " ##\n";
+
+	}
+	int moveNumber;
+	map[oneUnit.position.positionX][oneUnit.position.positionY].type = empty;
+	map[oneUnit.position.positionX][oneUnit.position.positionY].symbol = ' ';
+	std::cin >> moveNumber;
+	oneUnit.position.positionY = freeToMove.at(moveNumber - 1).positionX;
+	oneUnit.position.positionX = freeToMove.at(moveNumber - 1).positionY;
+	oneUnit.movmentLeft = false;
+	refreshMap();
+		//testowe
+	std::cout << "\nStartPositX: " << startPosit.positionX << "StartPositY: " << startPosit.positionY << "\n";
+	std::cout << "EndPositX: " << endPosit.positionX << "EndPositY: " << endPosit.positionY << "\n";
+	std::cout << "NewPositX: " << oneUnit.position.positionX << "NewPositY: " << oneUnit.position.positionY << "\n";
+	
+
 }
 
